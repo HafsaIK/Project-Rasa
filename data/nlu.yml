@@ -1,0 +1,101 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - أهلاً
+    - مرحباً
+    - السلام عليكم
+    - صباح الخير
+    - مساء الخير
+    - hello
+    - hi
+    - hey
+
+- intent: goodbye
+  examples: |
+    - وداعاً
+    - إلى اللقاء
+    - شكراً
+    - باي
+    - goodbye
+    - bye
+    - see you later
+
+- intent: book_flight
+  examples: |
+    - أريد حجز تذكرة طيران
+    - حجز طيران من [الرباط](ville_depart) إلى [باريس](ville_destination)
+    - أريد السفر يوم [15 يونيو](date_depart)
+    - رحلة [ذهاب وإياب](type_vol) [درجة اقتصادية](classe)
+    - طيران من [الدار البيضاء](ville_depart) إلى [دبي](ville_destination) يوم [20 مايو](date_depart)
+    - أريد تذكرة طيران [درجة أولى](classe)
+    - حجز رحلة [ذهاب فقط](type_vol) إلى [لندن](ville_destination)
+    - السفر من [مراكش](ville_depart) يوم [10 يوليو](date_depart) والعودة [25 يوليو](date_retour)
+
+- intent: book_hotel
+  examples: |
+    - أريد حجز فندق
+    - حجز فندق في [مراكش](ville_hotel)
+    - فندق [5 نجوم](categorie_hotel) في [الرباط](ville_hotel)
+    - أريد فندق في [منطقة جيليز](quartier) لـ[شخصين](nombre_personnes)
+    - حجز غرفة لـ[4 أشخاص](nombre_personnes)
+    - فندق [4 نجوم](categorie_hotel) في [الدار البيضاء](ville_hotel)
+    - أريد الإقامة في [وسط المدينة](quartier)
+
+- intent: select_option
+  examples: |
+    - اختر الخيار الأول
+    - أريد هذا
+    - موافق على هذا الاختيار
+    - هذا جيد
+    - أختار هذا
+
+- intent: change_option
+  examples: |
+    - أريد تغيير الخيار
+    - هل يمكن تعديل الحجز؟
+    - أريد خيار آخر
+    - تغيير التاريخ
+    - تعديل المدينة
+    - أريد تغيير المدينة إلى [الدار البيضاء](ville_destination)
+    - تغيير التاريخ إلى [25 يونيو](date_depart)
+    - أريد السفر من [أكادير](ville_depart) بدلاً من ذلك
+    - العودة يوم [30 يوليو](date_retour)
+    - أريد فندق في [فاس](ville_hotel) بدلاً من ذلك
+    - تغيير عدد الأشخاص إلى [3 أشخاص](nombre_personnes)
+
+- intent: confirm_reservation
+  examples: |
+    - أؤكد الحجز
+    - نعم، احجز لي
+    - موافق على الحجز
+    - تأكيد
+    - احجز
+
+- intent: affirm
+  examples: |
+    - نعم
+    - أجل
+    - موافق
+    - صحيح
+    - yes
+
+- intent: deny
+  examples: |
+    - لا
+    - لا شكراً
+    - غير موافق
+    - no
+
+- intent: inform
+  examples: |
+    - أريد السفر من [الرباط](ville_depart) إلى [دبي](ville_destination)
+    - تغيير التاريخ إلى [25 يونيو](date_depart)
+    - أريد السفر من [أكادير](ville_depart) بدلاً من ذلك
+    - العودة يوم [30 يوليو](date_retour)
+    - أريد فندق في [فاس](ville_hotel) بدلاً من ذلك
+    - تغيير عدد الأشخاص إلى [3 أشخاص](nombre_personnes)
+    - من [مراكش](ville_depart) إلى [الدار البيضاء](ville_destination)
+    - يوم [15 أغسطس](date_depart)
+    - فندق [3 نجوم](categorie_hotel) في [الرباط](ville_hotel)

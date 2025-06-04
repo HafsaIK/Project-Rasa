@@ -1,0 +1,72 @@
+version: "3.1"
+
+stories:
+
+- story: flight booking happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: book_flight
+  - action: action_search_flights
+  - intent: select_option
+  - intent: confirm_reservation
+  - action: action_confirm_booking
+
+- story: hotel booking happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: book_hotel
+  - action: action_search_hotels
+  - intent: select_option
+  - intent: confirm_reservation
+  - action: action_confirm_booking
+
+- story: change flight options with new data
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: book_flight
+  - action: action_search_flights
+  - intent: change_option
+  - action: action_change_options
+  - intent: inform
+  - action: action_search_flights
+  - intent: select_option
+  - intent: confirm_reservation
+  - action: action_confirm_booking
+
+- story: change hotel options with new data
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: book_hotel
+  - action: action_search_hotels
+  - intent: change_option
+  - action: action_change_options
+  - intent: inform
+  - action: action_search_hotels
+  - intent: select_option
+  - intent: confirm_reservation
+  - action: action_confirm_booking
+
+- story: user denies and asks for changes
+  steps:
+  - intent: book_flight
+  - action: action_search_flights
+  - intent: deny
+  - intent: change_option
+  - action: action_change_options
+
+- story: user affirms selection
+  steps:
+  - intent: book_flight
+  - action: action_search_flights
+  - intent: affirm
+  - intent: confirm_reservation
+  - action: action_confirm_booking
+
+- story: say goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
