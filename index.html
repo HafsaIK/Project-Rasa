@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌟 وكالة السفر الذكية - المساعد الشخصي</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            padding: 10px;
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% { transform: translateY(0); }
+            40%, 43% { transform: translateY(-15px); }
+            70% { transform: translateY(-7px); }
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+            height: calc(100vh - 20px);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .sidebar h2 {
+            color: #4a5568;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.3em;
+        }
+
+        .service-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .service-btn {
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(66, 153, 225, 0.4);
+            animation: pulse 0.6s ease-in-out;
+        }
+
+        .quick-actions {
+            margin-top: 30px;
+        }
+
+        .quick-actions h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .quick-action {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .quick-action:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateX(-5px);
+        }
+
+        /* Chat Container */
+        .chat-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        /* Header */
+        .chat-header {
+            background: linear-gradient(135deg, #4a5568, #2d3748);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chat-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .chat-header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .chat-header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .status-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #48bb78;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        /* Messages */
+        .chat-messages {
+            flex: 1;
+            padding: 25px;
+            overflow-y: auto;
+            background: linear-gradient(180deg, #f7fafc 0%, #edf2f7 100%);
+            position: relative;
+        }
+
+        .chat-messages::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(102, 126, 234, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(118, 75, 162, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .message {
+            margin: 20px 0;
+            animation: slideUp 0.4s ease-out;
+            position: relative;
+        }
+
+        .message-content {
+            max-width: 80%;
+            padding: 18px 22px;
+            border-radius: 20px;
+            position: relative;
+            word-wrap: break-word;
+            line-height: 1.5;
+        }
+
+        .user-message .message-content {
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+            box-shadow: 0 8px 25px rgba(66, 153, 225, 0.3);
+        }
+
+        .bot-message .message-content {
+            background: linear-gradient(135deg, #ffffff, #f7fafc);
+            color: #2d3748;
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin: 10px;
+        }
+
+        .user-message {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+        }
+
+        .user-message .message-avatar {
+            background: linear-gradient(135deg, #ed8936, #dd6b20);
+            color: white;
+            order: 2;
+        }
+
+        .bot-message {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-end;
+        }
+
+        .bot-message .message-avatar {
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+            color: white;
+        }
+
+        .message-time {
+            font-size: 0.75em;
+            opacity: 0.6;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        /* Typing indicator */
+        .typing-indicator {
+            display: none;
+            padding: 15px 20px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            margin: 10px 0;
+            width: fit-content;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #666;
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Input Area */
+        .chat-input {
+            background: white;
+            padding: 25px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .input-container {
+            flex: 1;
+            position: relative;
+        }
+
+        .chat-input input {
+            width: 100%;
+            padding: 18px 60px 18px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .chat-input input:focus {
+            outline: none;
+            border-color: #4299e1;
+            background: white;
+            box-shadow: 0 0 20px rgba(66, 153, 225, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .send-button {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .send-button:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 8px 25px rgba(66, 153, 225, 0.4);
+        }
+
+        .send-button:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .voice-button {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            border: none;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .voice-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(72, 187, 120, 0.4);
+        }
+
+        .voice-button.recording {
+            background: linear-gradient(135deg, #f56565, #e53e3e);
+            animation: pulse 1s infinite;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                height: auto;
+                min-height: calc(100vh - 20px);
+            }
+
+            .sidebar {
+                order: 2;
+                padding: 20px;
+            }
+
+            .chat-container {
+                order: 1;
+                min-height: 70vh;
+            }
+
+            .chat-header h1 {
+                font-size: 1.5em;
+            }
+
+            .message-content {
+                max-width: 90%;
+            }
+
+            .status-indicator {
+                position: static;
+                margin: 10px auto 0;
+                width: fit-content;
+            }
+        }
+
+        /* Scrollbar */
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+            border-radius: 10px;
+        }
+
+        /* Loading animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4299e1;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success animations */
+        .success-indicator {
+            color: #48bb78;
+            font-size: 1.2em;
+            animation: bounce 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2><i class="fas fa-concierge-bell"></i> خدماتنا</h2>
+            
+            <div class="service-buttons">
+                <button class="service-btn" onclick="quickMessage('أريد حجز طيران')">
+                    <i class="fas fa-plane"></i>
+                    حجز طيران
+                </button>
+                
+                <button class="service-btn" onclick="quickMessage('أريد حجز فندق')">
+                    <i class="fas fa-hotel"></i>
+                    حجز فندق
+                </button>
+                
+                <button class="service-btn" onclick="quickMessage('أريد باقة سياحية')">
+                    <i class="fas fa-map-marked-alt"></i>
+                    باقة سياحية
+                </button>
+                
+                <button class="service-btn" onclick="quickMessage('أريد استشارة سفر')">
+                    <i class="fas fa-compass"></i>
+                    استشارة سفر
+                </button>
+            </div>
+
+            <div class="quick-actions">
+                <h3><i class="fas fa-lightning-bolt"></i> أسئلة سريعة</h3>
+                
+                <div class="quick-action" onclick="quickMessage('ما هي أفضل الوجهات السياحية؟')">
+                    🌍 أفضل الوجهات السياحية
+                </div>
+                
+                <div class="quick-action" onclick="quickMessage('كم تكلفة السفر إلى دبي؟')">
+                    💰 تكلفة السفر إلى دبي
+                </div>
+                
+                <div class="quick-action" onclick="quickMessage('ما هي المستندات المطلوبة للسفر؟')">
+                    📋 المستندات المطلوبة
+                </div>
+                
+                <div class="quick-action" onclick="quickMessage('أريد إلغاء الحجز')">
+                    ❌ إلغاء الحجز
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    متصل
+                </div>
+                <h1><i class="fas fa-robot"></i> مساعدك الذكي للسفر</h1>
+                <p>أهلاً بك! أنا هنا لمساعدتك في تخطيط رحلتك المثالية</p>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <strong>🎉 أهلاً وسهلاً بك في وكالة السفر الذكية!</strong>
+                        <br><br>
+                        أنا مساعدك الشخصي للسفر، ويمكنني مساعدتك في:
+                        <br>✈️ <strong>حجز تذاكر الطيران</strong> - أفضل الأسعار والمواعيد
+                        <br>🏨 <strong>حجز الفنادق</strong> - من النجمة الواحدة إلى الخمس نجوم
+                        <br>🗺️ <strong>التخطيط للرحلات</strong> - برامج سياحية مخصصة
+                        <br>📋 <strong>تأكيد الحجوزات</strong> - خدمة سريعة وموثوقة
+                        <br><br>
+                        <em>💡 يمكنك استخدام الأزرار الجانبية للوصول السريع أو كتابة طلبك مباشرة!</em>
+                    </div>
+                </div>
+                <div class="message-time">الآن</div>
+            </div>
+
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            </div>
+
+            <div class="loading" id="loadingIndicator">
+                <div class="spinner"></div>
+                جاري البحث عن أفضل الخيارات...
+            </div>
+            
+            <div class="chat-input">
+                <div class="input-container">
+                    <input 
+                        type="text" 
+                        id="messageInput" 
+                        placeholder="اكتب رسالتك هنا... مثل: أريد السفر من الرباط إلى باريس"
+                        onkeypress="if(event.key==='Enter') sendMessage()"
+                        autocomplete="off"
+                    >
+                    <button class="send-button" onclick="sendMessage()" title="إرسال">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <button class="voice-button" onclick="toggleVoice()" title="رسالة صوتية" id="voiceButton">
+                    <i class="fas fa-microphone"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isRecording = false;
+        let recognition = null;
+
+        // Initialize speech recognition if available
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'ar-SA';
+            recognition.continuous = false;
+            recognition.interimResults = false;
+
+            recognition.onstart = function() {
+                isRecording = true;
+                document.getElementById('voiceButton').classList.add('recording');
+                document.getElementById('voiceButton').innerHTML = '<i class="fas fa-stop"></i>';
+            };
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                document.getElementById('messageInput').value = transcript;
+                sendMessage();
+            };
+
+            recognition.onend = function() {
+                isRecording = false;
+                document.getElementById('voiceButton').classList.remove('recording');
+                document.getElementById('voiceButton').innerHTML = '<i class="fas fa-microphone"></i>';
+            };
+        }
+
+        function toggleVoice() {
+            if (!recognition) {
+                alert('المتصفح لا يدعم التعرف على الصوت');
+                return;
+            }
+
+            if (isRecording) {
+                recognition.stop();
+            } else {
+                recognition.start();
+            }
+        }
+
+        function quickMessage(message) {
+            document.getElementById('messageInput').value = message;
+            sendMessage();
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Add user message with animation
+            addMessage(message, 'user');
+            input.value = '';
+
+            // Show typing indicator
+            showTypingIndicator();
+
+            try {
+                // Show loading for search-related queries
+                if (message.includes('حجز') || message.includes('أريد') || message.includes('بحث')) {
+                    showLoading();
+                }
+
+                const response = await fetch('http://localhost:5005/webhooks/rest/webhook', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        sender: 'user_' + Date.now(),
+                        message: message
+                    })
+                });
+
+                hideLoading();
+                hideTypingIndicator();
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                
+                // Add bot responses with delay for natural feel
+                if (data.length === 0) {
+                    setTimeout(() => {
+                        addMessage('عذراً، لم أفهم طلبك. يمكنك إعادة صياغته أو استخدام الأزرار الجانبية للمساعدة.', 'bot');
+                    }, 500);
+                } else {
+                    data.forEach((msg, index) => {
+                        setTimeout(() => {
+                            addMessage(msg.text, 'bot');
+                        }, 500 + (index * 1000));
+                    });
+                }
+                
+            } catch (error) {
+                hideLoading();
+                hideTypingIndicator();
+                setTimeout(() => {
+                    addMessage('🔴 عذراً، حدث خطأ في الاتصال. تأكد من تشغيل خادم Rasa أو حاول مرة أخرى.', 'bot');
+                }, 500);
+                console.error('Error:', error);
+            }
+        }
+
+        function addMessage(text, sender) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            
+            const currentTime = new Date().toLocaleTimeString('ar-SA', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+
+            if (sender === 'user') {
+                messageDiv.innerHTML = `
+                    <div class="message-content">${text}</div>
+                    <div class="message-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">${formatBotMessage(text)}</div>
+                `;
+            }
+
+            messagesDiv.appendChild(messageDiv);
+            
+            // Add time indicator
+            const timeDiv = document.createElement('div');
+            timeDiv.className = 'message-time';
+            timeDiv.textContent = currentTime;
+            messagesDiv.appendChild(timeDiv);
+            
+            // Smooth scroll to bottom
+            messagesDiv.scrollTo({
+                top: messagesDiv.scrollHeight,
+                behavior: 'smooth'
+            });
+
+            // Add success indicator for confirmations
+            if (text.includes('تم تأكيد') || text.includes('تم الحجز')) {
+                const successDiv = document.createElement('div');
+                successDiv.className = 'success-indicator';
+                successDiv.innerHTML = '<i class="fas fa-check-circle"></i> تم بنجاح!';
+                messagesDiv.appendChild(successDiv);
+                
+                // Remove success indicator after 3 seconds
+                setTimeout(() => {
+                    if (successDiv.parentNode) {
+                        successDiv.remove();
+                    }
+                }, 3000);
+            }
+        }
+
+        function formatBotMessage(text) {
+            // Add icons and formatting to bot messages
+            return text
+                .replace(/✈️|🛫/g, '<i class="fas fa-plane" style="color: #4299e1;"></i>')
+                .replace(/🏨|🏛️/g, '<i class="fas fa-hotel" style="color: #48bb78;"></i>')
+                .replace(/💰/g, '<i class="fas fa-money-bill-wave" style="color: #ed8936;"></i>')
+                .replace(/📍/g, '<i class="fas fa-map-marker-alt" style="color: #e53e3e;"></i>')
+                .replace(/📅/g, '<i class="fas fa-calendar-alt" style="color: #9f7aea;"></i>')
+                .replace(/💺/g, '<i class="fas fa-chair" style="color: #38b2ac;"></i>')
+                .replace(/⭐/g, '<i class="fas fa-star" style="color: #f6e05e;"></i>')
+                .replace(/👥/g, '<i class="fas fa-users" style="color: #4299e1;"></i>')
+                .replace(/✅/g, '<i class="fas fa-check-circle" style="color: #48bb78;"></i>')
+                .replace(/📋/g, '<i class="fas fa-clipboard-list" style="color: #667eea;"></i>');
+        }
+
+        function showTypingIndicator() {
+            document.getElementById('typingIndicator').style.display = 'block';
+            const messagesDiv = document.getElementById('chatMessages');
+            messagesDiv.scrollTo({
+                top: messagesDiv.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+
+        function hideTypingIndicator() {
+            document.getElementById('typingIndicator').style.display = 'none';
+        }
+
+        function showLoading() {
+            document.getElementById('loadingIndicator').style.display = 'block';
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingIndicator').style.display = 'none';
+        }
+
+        // Auto-resize input on focus
+        document.getElementById('messageInput').addEventListener('focus', function() {
+            this.style.transform = 'translateY(-2px)';
+        });
+
+        document.getElementById('messageInput').addEventListener('blur', function() {
+            this.style.transform = 'translateY(0)';
+        });
+
+        // Add enter key animation
+        document.getElementById('messageInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-2px)';
+                }, 100);
+            }
+        });
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Focus on input
+            document.getElementById('messageInput').focus();
+            
+            // Add welcome animation
+            setTimeout(() => {
+                const firstMessage = document.querySelector('.bot-message');
+                if (firstMessage) {
+                    firstMessage.style.animation = 'slideUp 0.6s ease-out';
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>

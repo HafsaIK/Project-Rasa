@@ -1,0 +1,107 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - book_flight
+  - book_hotel
+  - select_option
+  - change_option
+  - confirm_reservation
+  - inform
+
+entities:
+  - ville_depart
+  - ville_destination
+  - date_depart
+  - date_retour
+  - classe
+  - type_vol
+  - categorie_hotel
+  - ville_hotel
+  - quartier
+  - nombre_personnes
+
+slots:
+  ville_depart:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: ville_depart
+  ville_destination:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: ville_destination
+  date_depart:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: date_depart
+  date_retour:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: date_retour
+  classe:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: classe
+  type_vol:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: type_vol
+  categorie_hotel:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: categorie_hotel
+  ville_hotel:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: ville_hotel
+  quartier:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: quartier
+  nombre_personnes:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: nombre_personnes
+
+responses:
+  utter_greet:
+  - text: "أهلاً وسهلاً! كيف يمكنني مساعدتك اليوم؟"
+  
+  utter_goodbye:
+  - text: "شكراً لك على زيارتنا. أتمنى لك يوماً سعيداً!"
+  
+  utter_ask_service:
+  - text: "ما نوع الخدمة التي تريدها؟ حجز طيران أم حجز فندق؟"
+  
+  utter_flight_found:
+  - text: "وجدت لك رحلة ممتازة! التفاصيل ستظهر قريباً."
+  
+  utter_hotel_found:
+  - text: "وجدت لك فندق رائع! إليك التفاصيل."
+  
+  utter_confirm_reservation:
+  - text: "تم تأكيد حجزك بنجاح! شكراً لثقتك بنا. نتطلع لخدمتك مرة أخرى."
+
+actions:
+  - action_search_flights
+  - action_search_hotels
+  - action_confirm_booking
+  - action_change_options
+  - action_reset_slots
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
